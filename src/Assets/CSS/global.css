@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,400");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  *:before, *:after {
+    box-sizing: inherit;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  footer {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  
+  footer p {
+    margin-bottom: .25rem;
+  }
