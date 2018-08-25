@@ -9,7 +9,7 @@ export default class Footer extends Component {
                         <a href="#">Ir para o topo</a>
                     </p>
                     <p>Duo Gourmet Challenge © {(new Date()).getFullYear()}</p>
-                    <p>Lorem ipsum dolor sit amet</p>
+                    <p>(▀̿Ĺ̯▀̿ ̿) Challenge Accepted (▀̿Ĺ̯▀̿ ̿)</p>
                 </div>
             </footer>
         )

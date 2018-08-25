@@ -17,3 +17,17 @@
   footer p {
     margin-bottom: .25rem;
   }
+
+  .background-img{
+    background-image: url("../Images/background.jpg");
+    background-repeat:no-repeat;
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+    background-size:cover;
+    background-position:center;
+  }
+
+  .background-overlay{
+    background-color: rgba(0,0,0,0.7);
+  }

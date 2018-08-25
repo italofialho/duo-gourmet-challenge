@@ -6,7 +6,7 @@ import Main from '../Main';
 export default class Layout extends Component {
     render() {
         return (
-            <div>
+            <div className="bg-light">
                 <NavBar />
                 <Main>
                     {this.props.children}

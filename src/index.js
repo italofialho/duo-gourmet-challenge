@@ -4,6 +4,9 @@ import ReactDOM from 'react-dom';
 //! jQuery
 import $ from 'jquery';
 
+//! popper.js
+import PopperJs from 'popper.js';
+
 //! BOOTSTRAP 4 IMPORT
 import "bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';

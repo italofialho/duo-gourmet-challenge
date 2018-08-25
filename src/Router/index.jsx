@@ -4,21 +4,19 @@
 */
 
 import React from 'react';
-import { Route, Switch, HashRouter } from "react-router-dom";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { routes } from '../Routes';
 
 import Home from '../Components/Home';
 import NotFound from '../Components/NotFound';
 
 const App = () => (
-    <HashRouter>
+    <Router>
         <Switch>
             <Route exact path={routes.HOME} component={() => <Home />} />
-            <Route exact path={routes.SIGN_UP} component={() => <Home />} />
-            <Route exact path={routes.SIGN_IN} component={() => <Home />} />
             <Route component={() => <NotFound />} />
         </Switch>
-    </HashRouter>
+    </Router>
 );
 
 export default App;
