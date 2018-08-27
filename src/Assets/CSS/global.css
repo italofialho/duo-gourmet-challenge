@@ -3,31 +3,53 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  *:before, *:after {
+}
+
+*:before,
+*:after {
     box-sizing: inherit;
     -webkit-font-smoothing: antialiased;
-  }
-  
-  footer {
+}
+
+footer {
     padding-top: 3rem;
     padding-bottom: 3rem;
-  }
-  
-  footer p {
+}
+
+footer p {
     margin-bottom: .25rem;
-  }
+}
 
-  .background-img{
+.background-img {
     background-image: url("../Images/background.jpg");
-    background-repeat:no-repeat;
-    -webkit-background-size:cover;
-    -moz-background-size:cover;
-    -o-background-size:cover;
-    background-size:cover;
-    background-position:center;
-  }
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position: center;
+}
 
-  .background-overlay{
-    background-color: rgba(0,0,0,0.7);
-  }
+.background-overlay {
+    background-color: rgba(0, 93, 138, 0.6);
+}
+
+.jumbotron {
+    border-radius: unset;
+}
+
+.bg-custom{
+  background-color: #0078D7;
+}
+
+main{
+  padding-top: 3em;
+}
+
+.custom-group .btn.first{
+  border-right: transparent;
+}
+
+.custom-group .btn.last{
+  border-left: transparent;
+}

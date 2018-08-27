@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Layout from '../Layout';
 
 import _ from 'underscore';
+import axios from 'axios';
 
 export default class Home extends Component {
 
@@ -9,6 +10,7 @@ export default class Home extends Component {
     super(props);
     this.state = {
       restaurants: [],
+      restaurantsList: [],
       totalOfRestaurants: 0,
       uniqueCookingList: [],
       orderBy: 'review'
@@ -16,49 +18,25 @@ export default class Home extends Component {
   }
 
   //? When React finishes mounting the component shows the list with the restaurants
-  componentDidMount() {
-    this.prepareRestaurantList();
+  async componentDidMount() {
+    await this.requestRestaurantList();
   }
 
   //? Just return the list of restaurants
   //TODO: Implement restaurant search for an API or database
-  getRestaurantList() {
-    const restaurants = [
-      {
-        "name": "Trindade",
-        "cooking": "Brasileira",
-        "review": 4.4,
-        "distanceInMeters": 3000,
-        "coverImage": "https://i.imgur.com/ILzD2m1.jpg",
-        "logoImage": "https://i.imgur.com/Z9TfVSx.png"
-      },
-      {
-        "name": "Glouton",
-        "cooking": "Internacional",
-        "review": 4.9,
-        "distanceInMeters": 500,
-        "coverImage": "https://i.imgur.com/ezBscYh.jpg",
-        "logoImage": "https://i.imgur.com/rAV5NlT.png"
-      },
-      {
-        "name": "Xapuri",
-        "cooking": "Mineira",
-        "review": 4.1,
-        "distanceInMeters": 900,
-        "coverImage": "https://i.imgur.com/IHPqZoI.jpg",
-        "logoImage": "https://i.imgur.com/Amz328T.png"
-      },
-      {
-        "name": "Gomide",
-        "cooking": "Francesa",
-        "review": 4.6,
-        "distanceInMeters": 1000,
-        "coverImage": "https://i.imgur.com/zBVKlxz.jpg",
-        "logoImage": "https://i.imgur.com/JEf1Z3h.png"
-      }
-    ];
+  async requestRestaurantList() {
+    let restaurants = [];
+    const response = await axios.get("https://us-central1-duo-gourmet-challenge.cloudfunctions.net/getRestaurants");
+    const result = response.data;
+    if (result.success) {
+      restaurants = result.data;
+    }
+    this.setState({ restaurants, restaurantsList: restaurants });
+  }
 
-    return restaurants;
+  getRestaurantList() {
+    const { restaurantsList } = this.state;
+    return restaurantsList;
   }
 
   //? Gets the list of restaurants and the count that will be set to the state of the component
@@ -112,7 +90,7 @@ export default class Home extends Component {
   //? Filter the entire restaurant list by typing in the advanced filter search field
   filterRestaurantsByName(name) {
     const currentRestaurantList = this.getRestaurantList();
-    const restaurants = _.filter(currentRestaurantList, restaurant => _.contains(restaurant.name.toLowerCase(), name.toLowerCase()));
+    const restaurants = _.filter(currentRestaurantList, restaurant => restaurant.name.toLowerCase().indexOf(name.toLowerCase()) !== -1);
     const totalOfRestaurants = _.size(restaurants);
     this.setState({ restaurants, totalOfRestaurants }, () => this.orderRestaurantList());
   }
@@ -146,7 +124,7 @@ export default class Home extends Component {
         <div className="col-6 col-md-4 my-1">
           <label className="mr-sm-2" for="inlineFormCustomSelect">Tipo de culinária</label>
           <select className="custom-select mr-sm-2" id="inlineFormCustomSelect" onChange={(e) => this.handleCookingSelectChange(e)}>
-            <option selected value="">Todas</option>
+            <option value="">Todas</option>
             {
               _.map(uniqueCookingList, cooking => <option value={cooking}>{cooking}</option>)
             }
@@ -177,9 +155,9 @@ export default class Home extends Component {
             <div className="card-body">
               <h5 className="card-title">{restaurant.name}</h5>
               <div className="d-flex justify-content-between align-items-center">
-                <div className="btn-group">
-                  <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => this.filterRestaurantsByCooking(restaurant.cooking)}>{restaurant.cooking}</button>
-                  <button type="button" className="btn btn-sm btn-outline-warning"><i className="far fa-star fa-fw" />&nbsp;{restaurant.review}</button>
+                <div className="btn-group custom-group">
+                  <button type="button" className="btn btn-sm btn-outline-secondary first" onClick={() => this.filterRestaurantsByCooking(restaurant.cooking)}>{restaurant.cooking}</button>
+                  <button type="button" className="btn btn-sm btn-outline-info last"><i className="far fa-star fa-fw" />&nbsp;{restaurant.review}</button>
                 </div>
                 <small className="text-muted">{this.converterMetersForKilometers(restaurant.distanceInMeters)}</small>
               </div>
