@@ -51,10 +51,10 @@ Seu navegador padrão já deve estar aberto nesse momento exibindo o desafio
 ░░░░░░▀█▄░░░░░░░░░░░░░░░░░░░░░░▄█▀░░░░░░
 
 # Todos
-- Importar o JSON para o Firebase
-- Consumir dados diretamente do Firebase
-- Converter busca para o Firebase Functions (Node.js)
-- Enviar requisição para o Firebase Functions
+- Importar o JSON para o Firebase ✓
+- Consumir dados diretamente do Firebase ✓
+- Converter busca para o Firebase Functions (Node.js) ✓
+- Enviar requisição para o Firebase Functions ✓
 - Corrigir warnings do ReactJS
-- Publicar projeto do Firebase Hosting
+- Publicar projeto do Firebase Hosting ✓
 - Enviar desafio (Bitbucket + URL Firebase Hosting)
