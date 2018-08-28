@@ -81,3 +81,28 @@ main {
   opacity: 0.01;
   transition: opacity 300ms ease-in;
 }
+
+.error-template {padding: 40px 15px;text-align: center;}
+.error-actions {margin-top:15px;margin-bottom:15px;}
+.error-actions .btn { margin-right:10px; }
+
+
+.not-found{
+    background-image: url(https://media.giphy.com/media/ule4vhcY1xEKQ/giphy.gif);
+    background-repeat:no-repeat;
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+    background-size:cover;
+    background-position:center;
+    width: 100vw;
+    height: 100vh;
+    color: #fff;
+    overflow: hidden;
+}
+
+.not-found-overlay{
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100vw;
+    height: 100vh;
+}
