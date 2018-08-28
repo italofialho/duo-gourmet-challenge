@@ -7,6 +7,7 @@ A lista de requisitos que foi utilizado para a construção inicial da plataform
 - Utilização do Firebase RealTime Database para armazenar os restaurantes;
 - Utilização do Firebase Hosting para hospedagem da plataforma que pode ser [acessada por aqui]
 - Utilização do Firebase Functions para a criação dos EndPoints da API (Node.js)
+- Todos os EndPoints estão functionando e interagem diretamente com o banco (Caso queiram testar ✌️)
 - E vale a pena dar uma olhada na pagina de Not Found acessando qualquer rota sem sentido algum como '/cat_not_found' ou '/drink_coffe_every_minute'
 ```sh
                     .............                .""".             .""".    
