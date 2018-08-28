@@ -156,8 +156,8 @@ export default class Home extends Component {
         className="row">
         {_.map(restaurants, restaurant => {
           return (
-            <div className="col-md-3" key={restaurant.id}>
-              <div className="card mb-4 shadow-sm">
+            <div className="col-md-4" key={restaurant.id}>
+              <div className="card mb-4 mx-2 shadow-sm">
                 <img className="card-img-top" alt="Imagem principal do restaurante" style={{ height: '15vh', width: '100%', display: 'block' }} src={restaurant.coverImage} />
                 <div className="card-body">
                   <h5 className="card-title">{restaurant.name}</h5>

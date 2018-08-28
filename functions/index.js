@@ -43,10 +43,46 @@ exports.addRestaurant = functions.https.onRequest((request, response) => {
                     message: "Tivemos um problema para cadastrar o restaurante!"
                 });
             });
-        })
+        });
 });
 
 exports.updateRestaurant = functions.https.onRequest((request, response) => {
+    const parameters = request.body;
+    const { restaurant } = parameters;
+
+    if(!restaurant.id){
+        cors(request, response, () => {
+            response.json({
+                data: "restaurant id not found!",
+                success: false,
+                message: "Tivemos um problema para atualizar o restaurante!"
+            });
+        });
+
+        return;
+    }
+
+    db
+        .ref(`Restaurants/${restaurant.id}`)
+        .once("value")
+        .then(snap => {
+            cors(request, response, () => {
+                response.json({
+                    data: snap.val(),
+                    success: true,
+                    message: "Restaurante atualizado com sucesso!"
+                });
+            });
+        })
+        .catch((error) => {
+            cors(request, response, () => {
+                response.json({
+                    data: error,
+                    success: false,
+                    message: "Tivemos um problema para atualizar o restaurante!"
+                });
+            });
+        });
     response.send("AddRestaurant");
 });
 

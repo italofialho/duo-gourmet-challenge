@@ -11,7 +11,7 @@ export default class NavBar extends Component {
                             <img src={Images.logoWhite} style={{ width: '20%' }} alt="Duo Gourmet Logo Branca" />
                             <strong className="lead">&nbsp;Challenge</strong>
                         </a>
-                        <div className="">
+                        <div className="d-none d-md-block">
                             <button className="btn btn-outline-light mr-2">Assinar agora</button>
                             <button className="btn btn-outline-light mr-2">Baixar App</button>
                         </div>
