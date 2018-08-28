@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Layout from '../Layout';
 
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
 import _ from 'underscore';
 import axios from 'axios';
 
@@ -29,7 +31,7 @@ export default class Home extends Component {
     const response = await axios.get("https://us-central1-duo-gourmet-challenge.cloudfunctions.net/getRestaurants");
     const result = response.data;
     if (result.success) {
-      restaurants = result.data;
+      restaurants = _.values(result.data);
     }
     this.setState({ restaurants, restaurantsList: restaurants }, () => this.prepareRestaurantList());
   }
@@ -51,7 +53,7 @@ export default class Home extends Component {
 
   //? Create an array with the only cooking type to be displayed in the select search
   getUniqueCookingList() {
-    const { restaurants } = this.state;
+    const restaurants = this.getRestaurantList();
     const uniqueList = _.uniq(restaurants, restaurant => { return restaurant.cooking });
     const uniqueCookingList = _.map(uniqueList, "cooking");
     this.setState({ uniqueCookingList })
@@ -112,7 +114,6 @@ export default class Home extends Component {
   handleRestauranteNameChange(e) {
     const { value } = e.target;
     if (!value) return this.prepareRestaurantList();
-    console.log("handleRestauranteNameChange value:", value);
     this.filterRestaurantsByName(value);
   }
 
@@ -122,23 +123,23 @@ export default class Home extends Component {
     return (
       <div className="form-row align-items-center">
         <div className="col-6 col-md-4 my-1">
-          <label className="mr-sm-2" for="inlineFormCustomSelect">Tipo de culinária</label>
+          <label className="mr-sm-2" htmlFor="inlineFormCustomSelect">Tipo de culinária</label>
           <select className="custom-select mr-sm-2" id="inlineFormCustomSelect" onChange={(e) => this.handleCookingSelectChange(e)}>
             <option value="">Todas</option>
             {
-              _.map(uniqueCookingList, cooking => <option value={cooking}>{cooking}</option>)
+              _.map(uniqueCookingList, cooking => <option key={cooking} value={cooking}>{cooking}</option>)
             }
           </select>
         </div>
         <div className="col-6 col-md-4 my-1">
-          <label className="mr-sm-2" for="inlineFormCustomSelect">Ordenar por</label>
+          <label className="mr-sm-2" htmlFor="inlineFormCustomSelect">Ordenar por</label>
           <select className="custom-select mr-sm-2" id="inlineFormCustomSelect" name="orderBy" value={orderBy} onChange={(e) => this.handleOrderBySelectChange(e)}>
             <option value="review">Avaliação</option>
             <option value="distanceInMeters">Distância</option>
           </select>
         </div>
         <div className="col-12 col-md-4 my-1">
-          <label className="mr-sm-2" for="inlineFormCustomSelect">Nome do restaurante</label>
+          <label className="mr-sm-2" htmlFor="inlineFormCustomSelect">Nome do restaurante</label>
           <input className="mr-sm-2 form-control" onChange={e => this.handleRestauranteNameChange(e)} placeholder="Começe a digitar para pesquisar" />
         </div>
       </div>
@@ -147,25 +148,34 @@ export default class Home extends Component {
 
   renderRestaurantList() {
     const { restaurants } = this.state;
-    return _.map(restaurants, restaurant => {
-      return (
-        <div className="col-md-3">
-          <div className="card mb-4 shadow-sm">
-            <img className="card-img-top" alt="Imagem principal do restaurante" style={{ height: '15vh', width: '100%', display: 'block' }} src={restaurant.coverImage} />
-            <div className="card-body">
-              <h5 className="card-title">{restaurant.name}</h5>
-              <div className="d-flex justify-content-between align-items-center">
-                <div className="btn-group custom-group">
-                  <button type="button" className="btn btn-sm btn-outline-secondary first" onClick={() => this.filterRestaurantsByCooking(restaurant.cooking)}>{restaurant.cooking}</button>
-                  <button type="button" className="btn btn-sm btn-outline-info last"><i className="far fa-star fa-fw" />&nbsp;{restaurant.review}</button>
+    return (
+      <ReactCSSTransitionGroup
+        transitionName="fade"
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={300}
+        className="row">
+        {_.map(restaurants, restaurant => {
+          return (
+            <div className="col-md-3" key={restaurant.id}>
+              <div className="card mb-4 shadow-sm">
+                <img className="card-img-top" alt="Imagem principal do restaurante" style={{ height: '15vh', width: '100%', display: 'block' }} src={restaurant.coverImage} />
+                <div className="card-body">
+                  <h5 className="card-title">{restaurant.name}</h5>
+                  <div className="d-flex justify-content-between align-items-center">
+                    <div className="btn-group custom-group">
+                      <button type="button" className="btn btn-sm btn-outline-secondary first" onClick={() => this.filterRestaurantsByCooking(restaurant.cooking)}>{restaurant.cooking}</button>
+                      <button type="button" className="btn btn-sm btn-outline-info last"><i className="far fa-star fa-fw" />&nbsp;{restaurant.review}</button>
+                    </div>
+                    <small className="text-muted">{this.converterMetersForKilometers(restaurant.distanceInMeters)}</small>
+                  </div>
                 </div>
-                <small className="text-muted">{this.converterMetersForKilometers(restaurant.distanceInMeters)}</small>
               </div>
             </div>
-          </div>
-        </div>
-      )
-    })
+          )
+        })
+        }
+      </ReactCSSTransitionGroup>
+    )
   }
 
 

@@ -57,3 +57,27 @@ main {
 .card{
   transition: all .4s;
 }
+
+.ScrollUpButton_Container{
+    background-color: #0078D7 !important;
+    color: #fff;
+    border: 1px solid #000 !important;
+}
+
+.fade-enter {
+  opacity: 0.01;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.fade-leave {
+  opacity: 1;
+}
+
+.fade-leave.fade-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}

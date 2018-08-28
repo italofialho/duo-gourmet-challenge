@@ -55,6 +55,6 @@ Seu navegador padrão já deve estar aberto nesse momento exibindo o desafio
 - Consumir dados diretamente do Firebase ✓
 - Converter busca para o Firebase Functions (Node.js) ✓
 - Enviar requisição para o Firebase Functions ✓
-- Corrigir warnings do ReactJS
+- Corrigir warnings do ReactJS ✓
 - Publicar projeto do Firebase Hosting ✓
 - Enviar desafio (Bitbucket + URL Firebase Hosting)

@@ -5,9 +5,6 @@ export default class Footer extends Component {
         return (
             <footer className="text-muted">
                 <div className="container">
-                    <p className="float-right">
-                        <a href="#">Ir para o topo</a>
-                    </p>
                     <p>Duo Gourmet Challenge © {(new Date()).getFullYear()}</p>
                     <p>(▀̿Ĺ̯▀̿ ̿) Challenge Accepted (▀̿Ĺ̯▀̿ ̿)</p>
                 </div>
