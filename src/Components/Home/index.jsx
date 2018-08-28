@@ -31,7 +31,7 @@ export default class Home extends Component {
     if (result.success) {
       restaurants = result.data;
     }
-    this.setState({ restaurants, restaurantsList: restaurants });
+    this.setState({ restaurants, restaurantsList: restaurants }, () => this.prepareRestaurantList());
   }
 
   getRestaurantList() {
@@ -185,7 +185,7 @@ export default class Home extends Component {
             </div>
           </div>
         </section>
-        <div className="py-5 bg-light">
+        <div className="pb-5 bg-light">
           <div className="container">
             {this.renderAdvancedFilter()}
             <p className="lead">{totalOfRestaurants} restaurante{totalOfRestaurants > 1 ? "s" : ""} encontrado{totalOfRestaurants > 1 ? "s" : ""}</p>

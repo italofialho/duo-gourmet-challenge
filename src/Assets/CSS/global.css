@@ -38,18 +38,22 @@ footer p {
     border-radius: unset;
 }
 
-.bg-custom{
-  background-color: #0078D7;
+.bg-custom {
+    background-color: #0078D7;
 }
 
-main{
-  padding-top: 3em;
+main {
+    padding-top: 3em;
 }
 
-.custom-group .btn.first{
-  border-right: transparent;
+.custom-group .btn.first {
+    border-right: transparent;
 }
 
-.custom-group .btn.last{
-  border-left: transparent;
+.custom-group .btn.last {
+    border-left: transparent;
+}
+
+.card{
+  transition: all .4s;
 }
